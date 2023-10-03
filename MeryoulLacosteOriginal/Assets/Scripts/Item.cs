@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 
-public class Item : MonoBehaviour, IPointerDownHandler, IDragHandler
+public class Item : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     private Vector2 offset;
     private Transform item_pos;
+
 
     private void Start()
     {
@@ -27,10 +28,16 @@ public class Item : MonoBehaviour, IPointerDownHandler, IDragHandler
         offset = transform.position - (Vector3)eventData.position;
     }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        // Destroy the GameObject when the mouse button is released
+        //Destroy(gameObject);
+        Debug.Log('+');
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         // Update the image's position based on the mouse's current position
         transform.position = (Vector2)eventData.position + offset;
     }
-
 }
